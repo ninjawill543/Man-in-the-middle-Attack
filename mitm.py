@@ -13,5 +13,16 @@ for sent, received in result:
 for i in range (len(ip)):
     print(ip[i], " = ", mac[i])
 
+print("Chose a victim:")
+victim = input()
+print("Chose the router:")
+router = input()
+
+print ("victim ip: ", ip[victim])
+print ("victim mac: ", mac[victim])
+
+print ("router ip: ", ip[router])
+print ("router mac: ", mac[router])
+
     
     
