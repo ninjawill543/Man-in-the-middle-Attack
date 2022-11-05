@@ -27,7 +27,7 @@ routermac = (version.decode()).split()[3]
 
 print ("Victim ip: ", ip[victim],"    Victim mac: ", mac[victim])
 
-print ("Router ip: ", routerip,"    Router mac: ", routerip)
+print ("Router ip: ", routerip,"    Router mac: ", routermac)
 
 #hwsrc:mac source
 #hwdst: mac dest
