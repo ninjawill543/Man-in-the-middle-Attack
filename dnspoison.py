@@ -1,5 +1,6 @@
-from scapy.all import dns_spoof
+from scapy.all import sniff
 
 
-dns_spoof(iface="enp0s3", joker="10.5.1.3")
+a=sniff(filter="port 53",count=1,promisc=1)
+print(a[0])
   
