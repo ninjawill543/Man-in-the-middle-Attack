@@ -6,7 +6,7 @@ import time
 os.system('echo 1 > /proc/sys/net/ipv4/ip_forward') 
 
 
-result = srp((Ether(dst="ff:ff:ff:ff:ff:ff")/ARP(pdst="192.168.1.0/24")), timeout=3, verbose=0)[0]
+result = srp((Ether(dst="ff:ff:ff:ff:ff:ff")/ARP(pdst="10.5.1.0/24")), timeout=3, verbose=0)[0]
 
 print("Online IPs:")
 ip=[]
