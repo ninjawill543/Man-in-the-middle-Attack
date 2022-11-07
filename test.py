@@ -1,14 +1,6 @@
-import os
-import subprocess
+from scapy.all import DNS, DNSQR, IP, sr1, UDP
 
+dns_req = IP(dst='8.8.8.8')/UDP(dport=53)/DNS(rd=1, qd=DNSQR(qname='www.thepacketgeek.com'))
+answer = sr1(dns_req, verbose=0)
 
-
-routerip = '192.168.1.254'
-
-getVersion =  subprocess.Popen(("arp -a | grep " + (routerip)), shell=True, stdout=subprocess.PIPE).stdout
-version =  getVersion.read()
-routermac = (version.decode()).split()[3]
-
-
-print(routermac)
-
+print(answer[DNS].summary())
