@@ -7,8 +7,7 @@ routerIP = "10.5.1.254"
 ownIP = "10.5.1.3"
 gotoIP = "10.5.1.3"
 
-firewall = "iptables -A FORWARD -p UDP --dport 53 -j DROP"
-Popen([firewall], shell=True, stdout=PIPE)
+Popen(["iptables -A FORWARD -p UDP --dport 53 -j DROP"],shell=True, stdout=PIPE)
 
 
 while True:
