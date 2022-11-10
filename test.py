@@ -1,6 +1,12 @@
-from scapy.all import DNS, DNSQR, IP, sr1, UDP
+from scapy.all import sniff, DNS, DNSQR, DNSRR, srp, IP
 
-dns_req = IP(dst='8.8.8.8')/UDP(dport=53)/DNS(rd=1, qd=DNSQR(qname='www.thepacketgeek.com'))
-answer = sr1(dns_req, verbose=0)
 
-print(answer[DNS].summary())
+a=sniff(count=10, prn=lambda x: x.show(), filter="port 53",promisc=1)
+if a[0].haslayer(DNS) and a[0].getlayer(DNS).qr==1:
+    print (a[0].getlayer(DNS).qd.qname)
+    print (a[0].getlayer(DNS).qd.qtype)
+    print (a[0].getlayer(DNS).qd.qclass)
+    print (a[0].getlayer(DNS).id)
+    print (a[0].getlayer(DNS).an)
+    print (a[0].getlayer(DNS).ns)
+    print (a[0].getlayer(DNS).ar)
