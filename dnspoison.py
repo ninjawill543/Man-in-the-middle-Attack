@@ -1,7 +1,7 @@
 from scapy.all import sniff, DNS, DNSQR, DNSRR
 
 
-if (sniff(prn=lambda x: x.show(), filter="port 53",promisc=1))[0].haslayer(DNS) and a[0].getlayer(DNS).qr==0:
+if (sniff(prn=lambda x: x.show(), filter="port 53",promisc=1))[0].haslayer(DNS) and [0].getlayer(DNS).qr==0:
     print ([0].getlayer(DNS).qd.qname)
     print ([0].getlayer(DNS).qd.qtype)
     print ([0].getlayer(DNS).qd.qclass)
