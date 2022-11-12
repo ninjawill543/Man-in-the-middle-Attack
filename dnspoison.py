@@ -19,6 +19,7 @@ def spoofDNS(packet):
 
 
 while True:
-    sniffDNS()
+    print(sniffDNS())
+    print(spoofDNS())
 
     
