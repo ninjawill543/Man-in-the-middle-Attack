@@ -17,6 +17,6 @@ def spoofDNS(packet):
 
 if __name__ == '__main__':
     Popen(["iptables -A FORWARD -p UDP --dport 53 -j DROP"],shell=True, stdout=PIPE)
-    sniffDNS()
+    #sniffDNS()
 
     
