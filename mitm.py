@@ -5,7 +5,8 @@ import time
 
 os.system('echo 1 > /proc/sys/net/ipv4/ip_forward') 
 
-print("Please enter your network ip and subnet, by following this example: 192.168.1.0/24")
+print("Please enter your network ip and subnet, by following this example: ")
+print("192.168.1.0/24")
 net = input()
 
 result = srp((Ether(dst="ff:ff:ff:ff:ff:ff")/ARP(pdst=net)), timeout=3, verbose=0)[0]
