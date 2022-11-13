@@ -1,8 +1,11 @@
 from scapy.all import sniff, DNS, DNSQR, DNSRR, srp, IP, Ether, sendp, UDP
 from subprocess import Popen, PIPE
 
-victimIP = "10.5.1.2"
+file1 = open('id.txt', 'r')
+victimIP = file1
+file1.close()
 gotoIP = "10.5.1.3"
+print(victimIP)
 
 firewall = "iptables -A FORWARD -p UDP --dport 53 -j DROP" 
 Popen([firewall], shell=True, stdout=PIPE)
