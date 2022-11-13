@@ -6,7 +6,13 @@ import time
 os.system('echo 1 > /proc/sys/net/ipv4/ip_forward') 
 
 
-result = srp((Ether(dst="ff:ff:ff:ff:ff:ff")/ARP(pdst="192.168.1.0/24")), timeout=3, verbose=0)[0]
+getip =  subprocess.Popen(("hostname -I"), shell=True, stdout=subprocess.PIPE).stdout
+ip =  getip.read()
+rmac = (ip.decode()).split()[0]
+netsplit = rmac.split(".")
+net = netsplit[0]+"."+netsplit[1]+"."+netsplit[2]+".0"
+
+result = srp((Ether(dst="ff:ff:ff:ff:ff:ff")/ARP(pdst=net)), timeout=3, verbose=0)[0]
 
 print("Online IPs:")
 ip=[]
