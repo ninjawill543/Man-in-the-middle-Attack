@@ -30,6 +30,9 @@ print ("Victim ip: ", ip[victim],"    Victim mac: ", mac[victim])
 
 print ("Router ip: ", routerip,"    Router mac: ", routermac)
 
+file1 = open('id.txt', 'w')
+file1.write(ip[victim])
+file1.close()
 
 try:
     while True:
