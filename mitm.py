@@ -10,10 +10,10 @@ getip =  subprocess.Popen(("hostname -I"), shell=True, stdout=subprocess.PIPE).s
 ip =  getip.read()
 rmac = (ip.decode()).split()[0]
 netsplit = rmac.split(".")
-net = netsplit[0]+"."+netsplit[1]+"."+netsplit[2]+".0"
+net = int(netsplit[0]+"."+netsplit[1]+"."+netsplit[2]+".0")
 print(net)
 
-result = srp((Ether(dst="ff:ff:ff:ff:ff:ff")/ARP(pdst="10.5.1.0")), timeout=3, verbose=0)[0]
+result = srp((Ether(dst="ff:ff:ff:ff:ff:ff")/ARP(pdst=net)), timeout=3, verbose=0)[0]
 
 print("Online IPs:")
 ip=[]
