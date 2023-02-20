@@ -20,12 +20,5 @@ Steps to start the attack:
 The attack has now started, you may open wireshark and view the traffic passing from the victim to you, and then from you to the router, and vice versa.
 
 ## DNS poison:
-The dns poison script does not currently work, however here are the steps to run it anyways:
-
-Run the command 
-```
-sudo python3 dnspoison.py
-```
-
-Next, enter the ip address of the fake server that you would like to redirect the victim to.
+The dns poison script does not currently work
 
