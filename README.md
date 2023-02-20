@@ -1,9 +1,4 @@
-# How to use the mitm and dnspoison scripts
-
-## How to clone
-Please clone this link: https://github.com/ninjawill543/reseau.git
-
-Once you have used the cd command to move to reseau/TP5-MITM/Scripts, please follow the next steps.
+# How to use the mitm script
 
 ## MITM:
 To launch the mitm.py script, simply run
